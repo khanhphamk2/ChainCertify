@@ -1,0 +1,251 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_issuerContractAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_holderContractAddress",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "payable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "certificateCounts",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "name": "certificates",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "holder",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "issuer",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "data",
+                "type": "string"
+            },
+            {
+                "internalType": "bytes4",
+                "name": "signature",
+                "type": "bytes4"
+            },
+            {
+                "internalType": "bool",
+                "name": "isRevoked",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_holder",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "_certi",
+                "type": "bytes32"
+            }
+        ],
+        "name": "getCertificate",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            },
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_holder",
+                "type": "address"
+            }
+        ],
+        "name": "getCertificateCount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_holder",
+                "type": "address"
+            }
+        ],
+        "name": "getCertificatesByAddress",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "holder",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "issuer",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "data",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "bytes4",
+                        "name": "signature",
+                        "type": "bytes4"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isRevoked",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct Certificates.Certificate[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_holder",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "information",
+                "type": "string"
+            }
+        ],
+        "name": "issueCertificate",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_holder",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "_certi",
+                "type": "bytes32"
+            }
+        ],
+        "name": "revokeCertificate",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_holder",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "_certi",
+                "type": "bytes32"
+            }
+        ],
+        "name": "verifyCertificate",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
