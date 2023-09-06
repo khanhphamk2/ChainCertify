@@ -1,9 +1,11 @@
 const { Web3 } = require('web3');
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
+const config = require('../config/config');
+
+const web3 = new Web3(new Web3.providers.HttpProvider(config.web3Provider));
 
 const certificatesABI = require('../utils/abi/certificates.json');
 
-const certificateContractAddress = '0x3aa2941b80b6d5ab641573FD10e9E731057965A7';
+const certificateContractAddress = config.certificateAddress;
 
 const certificateContract = new web3.eth.Contract(certificatesABI, certificateContractAddress);
 
@@ -16,25 +18,47 @@ async function getCertificateCount(holderAddress) {
     }
 }
 
-async function issueCertificate(holderAddress, information) {
+const issueCertificate = async (issuerAddress, certificateBody) => {
     try {
-        const receipt = await certificateContract.methods.issueCertificate(holderAddress, information).send({ from: 'YOUR_SENDER_ADDRESS' });
-        console.log('Giao dịch issueCertificate đã được gửi. Hash giao dịch:', receipt.transactionHash);
+        const gas = await certificateContract.methods.issueCertificate(certificateBody).estimateGas();
+        const receipt = await certificateContract.methods.issueCertificate(certificateBody).send({
+            from: issuerAddress,
+            gas: gas,
+        });
+        console.log('Giao dịch createCertificate đã được gửi. Hash giao dịch:', receipt.transactionHash);
+        return receipt.transactionHash;
     } catch (error) {
-        console.error('Lỗi khi gọi hàm issueCertificate:', error);
+        console.error('Lỗi khi gọi hàm createCertificate:', error);
     }
 }
 
-async function createCertificate(holderAddress, information) {
+const revokeCertificate = async (issuerAddress, certificateBody) => {
     try {
-
+        const gas = await certificateContract.methods.revokeCertificate(certificateBody).estimateGas();
+        const receipt = await certificateContract.methods.revokeCertificate(certificateBody).send({
+            from: issuerAddress,
+            gas: gas,
+        });
+        console.log('Giao dịch revokeCertificate đã được gửi. Hash giao dịch:', receipt.transactionHash);
+        return receipt.transactionHash;
     } catch (error) {
-        console.error('Lỗi khi gọi hàm createCertificate:', error);
+        console.error('Lỗi khi gọi hàm revokeCertificate:', error);
+    }
+}
+
+const verifyCertificate = async (holderAddress, certificateHash) => {
+    try {
+        const result = await certificateContract.methods.verifyCertificate(holderAddress, certificateHash).call();
+        console.log('Kết quả xác thực chứng chỉ:', result);
+        return result;
+    } catch (error) {
+        console.error('Lỗi khi gọi hàm verifyCertificate:', error);
     }
 }
 
 module.exports = {
     issueCertificate,
     getCertificateCount,
-    createCertificate
+    revokeCertificate,
+    verifyCertificate,
 }

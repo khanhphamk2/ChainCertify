@@ -16,10 +16,10 @@ const defaultRoutes = [
     //     path: '/wallet',
     //     route: walletRoute,
     // },
-    // {
-    //     path: '/issuer',
-    //     route: issuerRoute,
-    // },
+    {
+        path: '/issuer',
+        route: issuerRoute,
+    },
     // {
     //     path: '/holder',
     //     route: holderRoute,
