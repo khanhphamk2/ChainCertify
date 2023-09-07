@@ -65,11 +65,6 @@
                 "type": "string"
             },
             {
-                "internalType": "bytes4",
-                "name": "signature",
-                "type": "bytes4"
-            },
-            {
                 "internalType": "bool",
                 "name": "isRevoked",
                 "type": "bool"
@@ -164,11 +159,6 @@
                         "type": "string"
                     },
                     {
-                        "internalType": "bytes4",
-                        "name": "signature",
-                        "type": "bytes4"
-                    },
-                    {
                         "internalType": "bool",
                         "name": "isRevoked",
                         "type": "bool"
@@ -222,30 +212,6 @@
         "name": "revokeCertificate",
         "outputs": [],
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_holder",
-                "type": "address"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "_certi",
-                "type": "bytes32"
-            }
-        ],
-        "name": "verifyCertificate",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "view",
         "type": "function"
     }
 ]

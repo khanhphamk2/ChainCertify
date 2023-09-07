@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ChainCertify</title>
+</head>
+
+<body>
+    <h1>Connect Meta Mask</h1>
+    <button id="connectButton">Kết nối MetaMask</button>
+    <div id="accountInfo"></div>
+
+    <h1>Issue Certificate</h1>
+    <form id="dataForm">
+        <label for="address">Địa chỉ:</label>
+        <input type="text" id="address" name="address"><br>
+
+        <label for="information">Thông tin:</label>
+        <textarea id="information" name="information"></textarea><br>
+
+        <button type="submit">Gửi yêu cầu POST</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script>
+        const connectButton = document.getElementById('connectButton');
+        const accountInfo = document.getElementById('accountInfo');
+
+        let web3;
+
+        async function connectMetaMask() {
+            try {
+                // Kiểm tra xem có trình duyệt có MetaMask không
+                if (window.ethereum) {
+                    web3 = new Web3(window.ethereum);
+                    await window.ethereum.enable(); // Yêu cầu quyền kết nối
+                    const accounts = await web3.eth.getAccounts();
+                    const selectedAccount = accounts[0];
+                    accountInfo.innerHTML = `Tài khoản đang kết nối: ${selectedAccount}`;
+                } else {
+                    throw new Error('Trình duyệt không hỗ trợ MetaMask.');
+                }
+            } catch (error) {
+                console.error(error.message);
+                accountInfo.innerHTML = `Đã xảy ra lỗi: ${error.message}`;
+            }
+        }
+
+        connectButton.addEventListener('click', connectMetaMask);
+    </script>
+
+    <script>
+        const dataForm = document.getElementById('dataForm');
+        const resultDiv = document.getElementById('result');
+
+        async function postDataToAPI(event) {
+            event.preventDefault(); // Ngăn chặn gửi biểu mẫu bằng cách chạy lại trang
+
+            try {
+                // Lấy giá trị từ biểu mẫu
+                const address = document.getElementById('address').value;
+                const information = document.getElementById('information').value;
+
+                // Định cấu hình cho yêu cầu POST
+                const dataToSend = {
+                    address,
+                    information,
+                };
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json', // Định nghĩa loại dữ liệu gửi đi
+                    },
+                    body: JSON.stringify(dataToSend), // Chuyển đổi dữ liệu thành chuỗi JSON
+                };
+
+                // Gửi yêu cầu POST đến API (thay thế URL của API thực tế)
+                const response = await fetch('http://localhost:3000/v1/certificates/issue', requestOptions);
+
+                // Kiểm tra trạng thái của phản hồi HTTP
+                if (!response.ok) {
+                    throw new Error(response);
+                }
+
+                // Chuyển đổi dữ liệu JSON từ phản hồi
+                const responseData = await response.json();
+
+                // Hiển thị kết quả trên trang web
+                resultDiv.innerHTML = `Kết quả từ API: ${JSON.stringify(responseData)}`;
+            } catch (error) {
+                console.error(error.message);
+                resultDiv.innerHTML = `Đã xảy ra lỗi: ${error.message}`;
+            }
+        }
+
+        dataForm.addEventListener('submit', postDataToAPI);
+    </script>
+</body>
+
+</html>

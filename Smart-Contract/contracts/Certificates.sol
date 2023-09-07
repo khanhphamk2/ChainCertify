@@ -13,7 +13,6 @@ contract Certificates {
         address holder;
         address issuer;
         string data;
-        bytes4 signature;
         bool isRevoked;
     }
 
@@ -40,13 +39,12 @@ contract Certificates {
         address _holder,
         string memory information
     ) public onlyAuthorizedIssuer returns (bytes32) {
-        bytes4 sign = msg.sig; // Get the transaction signature from MetaMask
-        bytes32 hash = keccak256(abi.encode(_holder, information, sign));
+        // bytes4 sign = msg.sig; // Get the transaction signature from MetaMask
+        bytes32 hash = keccak256(abi.encode(_holder, information));
         certificates[_holder][hash] = Certificate(
             _holder,
             msg.sender,
             information,
-            sign,
             false
         );
         certificateCounts[_holder]++;
@@ -82,15 +80,14 @@ contract Certificates {
         certificates[_holder][_certi].isRevoked = true;
     }
 
-    function verifyCertificate(
-        address _holder,
-        bytes32 _certi
-    ) external view returns (bool) {
-        return (!certificates[_holder][_certi].isRevoked &&
-            VerifySignature.verify(
-                certificates[_holder][_certi].issuer,
-                certificates[_holder][_certi].data,
-                certificates[_holder][_certi].signature
-            ));
-    }
+    // function verifyCertificate(
+    //     address _holder,
+    //     bytes32 _certi
+    // ) external view returns (bool) {
+    //     return (!certificates[_holder][_certi].isRevoked &&
+    //         VerifySignature.verify(
+    //             certificates[_holder][_certi].issuer,
+    //             certificates[_holder][_certi].data,
+    //         ));
+    // }
 }

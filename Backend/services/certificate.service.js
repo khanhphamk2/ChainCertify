@@ -9,26 +9,23 @@ const certificateContractAddress = config.certificateAddress;
 
 const certificateContract = new web3.eth.Contract(certificatesABI, certificateContractAddress);
 
-async function getCertificateCount(holderAddress) {
+const issue = async (_issuer, _holder, information) => {
     try {
-        const count = await certificateContract.methods.getCertificateCount(holderAddress).call();
-        console.log(`Số chứng chỉ của địa chỉ ${holderAddress}: ${count}`);
+        const issuer = _issuer.toString();
+        const holder = _holder.toString();
+        const gas = await certificateContract.methods.issueCertificate(holder, information).estimateGas({ gas: 50000000 });
+        if (gas > 50000000) {
+            console.log('Gas lớn hơn 50000000');
+            return;
+        } else {
+            const result = await certificateContract.methods.issueCertificate(holder, information).send({
+                from: issuer,
+                gas: gas,
+            });
+            return result.toString();
+        }
     } catch (error) {
-        console.error('Lỗi khi gọi hàm getCertificateCount:', error);
-    }
-}
-
-const issueCertificate = async (issuerAddress, certificateBody) => {
-    try {
-        const gas = await certificateContract.methods.issueCertificate(certificateBody).estimateGas();
-        const receipt = await certificateContract.methods.issueCertificate(certificateBody).send({
-            from: issuerAddress,
-            gas: gas,
-        });
-        console.log('Giao dịch createCertificate đã được gửi. Hash giao dịch:', receipt.transactionHash);
-        return receipt.transactionHash;
-    } catch (error) {
-        console.error('Lỗi khi gọi hàm createCertificate:', error);
+        return error;
     }
 }
 
@@ -57,8 +54,7 @@ const verifyCertificate = async (holderAddress, certificateHash) => {
 }
 
 module.exports = {
-    issueCertificate,
-    getCertificateCount,
+    issue,
     revokeCertificate,
     verifyCertificate,
 }

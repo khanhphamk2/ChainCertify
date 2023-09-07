@@ -1,35 +1,42 @@
 const { Web3 } = require('web3');
-
-const web3 = new Web3(window.ethereum);
-
 const httpStatus = require('http-status');
+const config = require('../config/config');
 const catchAsync = require('../utils/catchAsync');
 const { certificateService } = require('../services');
 
+// Initialize Web3 with your provider (e.g., Infura)
+const web3 = new Web3(new Web3.providers.HttpProvider(config.web3Provider));
+
 const createCertificate = catchAsync(async (req, res) => {
-    if (window.ethereum) {
-        const address = web3.eth.getAccounts()[0];
+    try {
 
-        const certificate = await certificateService.issueCertificate(address, req.body);
+        // const { issuer, holder, information } = req.body;
 
-        res.status(httpStatus.CREATED).send(certificate);
-    } else {
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).send('Vui lòng kết nối MetaMask để sử dụng ứng dụng này.');
-        console.error('Vui lòng kết nối MetaMask để sử dụng ứng dụng này.');
+        const issuer = (req.body.issuer).toString();
+        const holder = (req.body.holder).toString();
+        const information = req.body.information;
+
+        const result = await certificateService.issue(issuer, holder, information);
+
+        // Assuming the certificateService returns a transaction hash or relevant data
+        res.status(httpStatus.OK).send(result.toString());
+    } catch (error) {
+        // Handle the error and send an appropriate response to the client
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error, 'Error creating certificate');
     }
 });
 
+
 const revokeCertificate = catchAsync(async (req, res) => {
-    if (window.ethereum) {
+    try {
+        const web3 = new Web3(window.ethereum);
         const address = web3.eth.getAccounts()[0];
 
         const revoke = await certificateService.revokeCertificate(address, req.body);
 
         res.status(httpStatus.CREATED).send(revoke);
-    } else {
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).send('Vui lòng kết nối MetaMask để sử dụng ứng dụng này.');
-
-        console.error('Vui lòng kết nối MetaMask để sử dụng ứng dụng này.');
+    } catch (error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error, 'Error revoking certificate');
     }
 });
 

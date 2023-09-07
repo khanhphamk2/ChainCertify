@@ -9,10 +9,10 @@ const envVarsSchema = Joi.object()
         PORT: Joi.number().default(3000),
         MONGODB_URL: Joi.string().required().description('Mongo DB url'),
         NETWORK: Joi.string().required().description('Network URL'),
-        CERTIFICATE: Joi.string().required().description('Certificate contract address'),
+        CERTI: Joi.string().required().description('Certificate contract address'),
         ISSUER: Joi.string().required().description('Issuer contract address'),
         HOLDER: Joi.string().required().description('Holder contract address'),
-        VERIFICATION: Joi.string().required().description('Verification contract address'),
+        VERIFY: Joi.string().required().description('Verification contract address'),
     })
     .unknown();
 
@@ -33,7 +33,7 @@ module.exports = {
     },
     web3Provider: envVars.NETWORK,
     issuerAddress: envVars.ISSUER,
-    certificateAddress: envVars.CERTIFICATE,
-    verificationAddress: envVars.VERIFICATION,
+    certificateAddress: envVars.CERTI,
+    verificationAddress: envVars.VERIFY,
     holderAddress: envVars.HOLDER,
 };
