@@ -1,12 +1,42 @@
-# 1. Title
+# 1. Title: ChainCertify
 
-ChainCertify: RSA-Accumulator Cert Management.
+![ChainCertify](Pictures\cover_image.jpg)
 
-![ChainCertify](./Pictures/cover_image_new.png)
+# 2. Product Description
 
-## 2. Product Description
+## 2.1. Inspiration
 
-### 2.1. Application Domain
+In the rapidly evolving world of _web3_ applications, where decentralization and blockchain technology are revolutionizing various industries, **ChainCertify** stands as a transformative solution for candidates seeking reliable and authentic certifications.
+Across sectors like education, employment, healthcare, study abroad applications, and government positions, the demand for minimum certification in application dossiers remains indispensable. These certifications serve as concrete evidence of a candidate's skills and capabilities, acting as a critical prerequisite for career advancement.
+Recognizing the need for trust, transparency, and ownership in the certification process, **ChainCertify** harnesses the power of _web3_ and blockchain technology. By leveraging the immutable nature of the blockchain, **ChainCertify** ensures that certifications are securely recorded, tamper-proof, and verifiable by all relevant stakeholders.
+With **ChainCertify**, candidates can confidently present their certifications, knowing that they are backed by the inherent reliability and high authenticity of blockchain technology. This innovative _web3_ application empowers candidates to take control of their career journey, providing a seamless and trustworthy platform for showcasing their skills and work/study capabilities.
+Experience the future of certification with **ChainCertify**, where web3 technology meets the needs of today's dynamic and decentralized world.
+
+## 2.2. What it does
+
+**ChainCertify**  with three core utilities included issuance, revocation and sharing within an application based on blockchain technology platform: decentralized, trustless, high privacy.
+**ChainCertify** addresses shortcomings in the issuance and revocation of certificates in centralized systems. With its decentralized nature and data integrity, this system enables us to allocate and manage certificates within a specific environment (e.g., university, ...). We can efficiently share our credentials with potential employers, ensuring swift and transparent transactions, which greatly facilitates the recruitment process.
+With emerging technologies, we can securely share essential certificate information, preventing leaks of sensitive data. Issuing through smart contracts enhances transparency, verification, and guards against fraudulent issuance or revocation of certificates.
+
+## 2.3. How we built it
+
+**ChainCertify** project was built on _Javascript_, _Smart Contract_, _React.js_, _Ethereum_, _RSA Accumulator_.
+Here is the detail application architecture:
+ ![ChainCertify architecture](https://i.imgur.com/9QORd0F.png)
+The general user information on the website will be stored in a database after being processed by the website's server. If a user requests certificate issuance, a smart contract will receive that request and generate a new certificate, uploading it to _IPFS_. The _Ethereum_ blockchain will store transaction details and certificate information in the form of hashes.
+
+## 2.4. Challenges we ran into
+
+However, our application hasn’t been completed yet.
+During the development process of our **ChainCertify** project, we encountered notable obstacles due to the incomplete support of cryptography algorithms in the _Solidity_ programming language. This limitation posed significant difficulties, impeding our progress in achieving project completion.
+Additionally, we’re implementing a feature called _RSA Accumulator_ which holds the promise to make the certificate management platform more secure, safe, and reliable.
+
+## 2.5. Accomplishments that we're proud of
+
+Although our project is still incomplete in terms of product development, the concept it brings forth holds the potential for practical application in addressing real-world issues. **ChainCertify** addresses shortcomings in the issuance and revocation of certificates in centralized systems. Our project will build a place where certificate holders and issuers can connect and communicate with each other. Users can use this place as an achievement showcase and employers will have a reliable place to verify the qualifications of the employees they need to hire. With the benefits brought by _Ethereum_’s smart contract, employers can easily and quickly verify the current status of certificates.
+
+
+## 2.6. Application Domain
 
 The issuance and revocation of certificates through an RSA Accumulator-integrated smart contract system, known as ChainCertify, holds promising potential across various domains. It offers convenience, transparency, and security to the certificate management process.
 
@@ -15,15 +45,7 @@ In the healthcare sector[2]: This system can also be applied to manage specializ
 
 The RSA Accumulator-powered certificate issuance and revocation system, ChainCertify, holds the potential for widespread application in various domains, promoting transparency, security, and convenience in managing certificates and related information.
 
-### 2.2. Challenges
-
-Traditional certificate management and issuance face several challenges, including low security, time consumption, difficulty in verification, and lack of transparency. Tracking and retrieving the issuance and revocation history in traditional systems are also challenging, lacking an easy mechanism for transparency. Reliance on multiple third parties introduces complexity and increases the risk of errors.
-
-The advent of the internet has brought significant changes to certificate management. The transition to online processes has facilitated the exchange and sharing of certificate information, saving time and resources. However, this rapid development also poses security challenges, necessitating strong security measures. Centralized systems also encounter issues, as reliance on a few intermediaries can lead to reduced transparency and potential obstacles. Incidents involving third parties or technical problems can impact centralized systems.
-
-In this context, with the growing adoption of blockchain technology, including Smart Contracts, the issuance, revocation, and management of certificates have advanced further through decentralized systems. The application of RSA Accumulator alongside smart contracts can address these challenges by enhancing security through information encryption and blockchain storage, preventing certificate forgery, data tampering, and the need to disclose certificate information during verification. Simultaneously, the automation of the issuance and revocation process optimizes procedures and reduces the errors commonly associated with manual processes. Additionally, recording transactions on the blockchain through smart contracts ensures transparency in certificate management. All parties involved can easily verify the issuance and revocation history, creating a transparent and immutable data environment.
-
-### 2.3. Pros and Cons of Smart Contracts [1]
+## 2.7. Pros and Cons of Smart Contracts [1]
 
 Smart contracts are a vital component of blockchain technology, enabling automated transactions and agreements without intermediaries, based on predefined conditions. Smart contracts are programmed and executed on the blockchain platform, ensuring the integrity and transparency of transactions.
 
@@ -42,11 +64,11 @@ Smart contracts are a vital component of blockchain technology, enabling automat
 - **Third Party Involvement:** While aiming to eliminate third parties, complete removal is not feasible. Third parties assume altered roles compared to traditional contracts.
 - **Vague Terms:** Smart contracts may struggle with unclear terms that rely on precise code execution.
 
-### 2.4. ChainCertify Certificate Management System
+## 2.8. ChainCertify Certificate Management System
 
 Based on the understanding of certificate management systems and the current challenges they face, we have chosen a typical use case for certificate management: university certificate management. By utilizing smart contracts and RSA Accumulator, ChainCertify enhances transparency, data security, cost savings, accessibility, and fraud prevention.
 
-#### 2.4.1. Certificate Issuance Process
+### 2.8.1. Certificate Issuance Process
 
 **Certificate Creation:** The Certificate Contract generates a certificate using user-provided information.
 **Certificate Information Verification:** Ensures accurate certificate information.
@@ -54,14 +76,14 @@ Based on the understanding of certificate management systems and the current cha
 **Data Upload to IPFS:** Certificate information and Accumulated Value are stored on IPFS to ensure data integrity and retrieval efficiency.
 **Certificate Issuance to Holder:** Valid certificates are automatically issued to holders.
 
-#### 2.4.2. Certificate Revocation Process
+### 2.8.2. Certificate Revocation Process
 
 **Certificate Verification:** Determines the validity and issuance status of a certificate.
 **Revocation:** Upon successful verification, the smart contract generates a revocation proof and updates the RSA Accumulator's value.
 **IPFS Data Update:** Updates any changed information on IPFS.
 **Successful Revocation Notification.**
 
-#### 2.4.3. Interaction with RSA Accumulator
+### 2.8.3. Interaction with RSA Accumulator
 
 RSA Accumulator plays a continual role in the decentralized certificate and data management process.
 
@@ -89,9 +111,9 @@ RSA Accumulator plays a continual role in the decentralized certificate and data
 - Upon specific information requests, the system performs corresponding calculations and provides the necessary information.
 - The interaction between the system and RSA Accumulator relies on encryption, integration, and proofs to securely, confidentially, and reliably manage certificates and data.
 
-## 3. System
+# 3. System
 
-### 3.1. System Architecture
+## 3.1. System Architecture
 
 ![System Architecture](./Pictures/ChainCertify_SystemArchitecture.png)
 
@@ -109,7 +131,7 @@ RSA Accumulator plays a continual role in the decentralized certificate and data
 - Update Accumulated Value: Updates the value for the RSA Accumulator.
 - In addition to the aforementioned key components, the RSA Accumulator also includes other components such as MemWitCreate, ProveMem, ProveNonMem, NonMemWitCreate, and more.
 
-### 3.2. Diagrams
+## 3.2. Diagrams
 
 **User-Case:**
 
@@ -179,7 +201,26 @@ This sequence diagram captures the steps involved in revoking a certificate, inc
 - MongoDB: Improves processing speed for holder-related functionalities and reduces costs. It stores holder information such as names and other relevant details.
 - RSA Accumulator: A cryptographic tool used to authenticate sets of data. It enables proving set relationships (membership, subset, etc.) to verifiers while minimizing the amount of data they need to store.
 
-**References:**
+# 4. What we learned
+
+The development of the **ChainCertify** project has been a valuable learning experience, providing us with significant insights and knowledge in the field of certificate management and blockchain technology. Here are some key takeaways from our journey:
+
+1. Blockchain's Potential: Through the **ChainCertify** project, we have witnessed firsthand the immense potential of blockchain technology, particularly in the realm of certificate management. The decentralized and immutable nature of the blockchain has proven to be instrumental in ensuring trust, transparency, and security in the certification process.
+2. Solidity and Smart Contracts: As we delved into the development of **ChainCertify**, we gained a deep understanding of Solidity, the programming language used for writing smart contracts on the Ethereum blockchain. We learned how to design and implement smart contracts to automate the issuance, revocation, and verification of certificates, enhancing the efficiency and reliability of the entire process.
+3. User-Centric Design: **ChainCertify's** development journey emphasized the importance of user-centric design. We focused on creating a seamless and intuitive user interface, considering the needs and preferences of both certificate issuers and recipients. Iterative user testing and feedback helped us refine the user experience, ensuring a user-friendly platform.
+4. Security Considerations: Building a secure certificate management system was a priority throughout the development process. We learned about the importance of cryptographic techniques, such as RSA Accumulator, for ensuring data integrity, privacy, and protection against fraudulent activities. Implementing robust security measures was crucial to safeguard sensitive user information.
+
+5. Collaboration and Teamwork: The **ChainCertify** project required close collaboration among team members with diverse skill sets. We learned the importance of effective communication, coordination, and division of tasks to ensure smooth progress and timely delivery. Working together towards a common goal taught us valuable lessons in teamwork and project management.
+
+6. Evolving Technologies: As the project progressed, we stayed updated with the latest advancements in blockchain technology and certificate management practices. Adapting to emerging technologies and incorporating them into the project allowed us to explore new possibilities and push the boundaries of innovation.
+
+The **ChainCertify** project provided us with valuable insights into the potential of blockchain technology, the intricacies of smart contract development, the significance of user-centric design, the importance of security considerations, the power of collaboration, and the need to stay abreast of evolving technologies. These lessons learned will undoubtedly shape our future endeavors and contribute to the continuous improvement of certificate management solutions.
+
+# 5. What's next for ChainCertify
+
+As we look to the future of the **ChainCertify** project, our next major milestone is the complete integration of _RSA Accumulator_. This integration will further enhance the efficiency, security, and scalability of our certificate management solution. Our goal is to establish **ChainCertify** as a leading solution for secure and transparent certificate management. By fully integrating _RSA Accumulator_ and continuously evolving the platform, we aim to revolutionize the way certificates are issued, verified, and shared, providing a trusted and efficient ecosystem for individuals, organizations, and educational institutions alike.
+
+# References:
 
 [1] "Smart contracts," Corporate Finance Institute, <https://corporatefinanceinstitute.com/resources/valuation/smart-contracts/> (accessed Aug. 20, 2023).
 
