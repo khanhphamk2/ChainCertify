@@ -9,14 +9,9 @@ const web3 = new Web3(new Web3.providers.HttpProvider(config.web3Provider));
 
 const createCertificate = catchAsync(async (req, res) => {
     try {
-
-        // const { issuer, holder, information } = req.body;
-
         const issuer = (req.body.issuer).toString();
         const holder = (req.body.holder).toString();
-        const information = req.body.information;
-
-        const result = await certificateService.issue(issuer, holder, information);
+        const result = await certificateService.issue(issuer, holder, req.body.information);
 
         // Assuming the certificateService returns a transaction hash or relevant data
         res.status(httpStatus.OK).send(result.toString());

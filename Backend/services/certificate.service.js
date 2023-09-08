@@ -20,7 +20,7 @@ const issue = async (_issuer, _holder, information) => {
         } else {
             const result = await certificateContract.methods.issueCertificate(holder, information).send({
                 from: issuer,
-                gas: gas,
+                gas: 20000,
             });
             return result.toString();
         }
